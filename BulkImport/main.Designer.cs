@@ -33,16 +33,27 @@
             txtFileName = new TextBox();
             dgvExcel = new DataGridView();
             gbEnvironment = new GroupBox();
+            chkTablePostBackup = new CheckBox();
+            chkTablePreBackup = new CheckBox();
             lblConnectionDetails = new Label();
             label5 = new Label();
             groupBox2 = new GroupBox();
+            label9 = new Label();
+            label8 = new Label();
+            label7 = new Label();
+            label4 = new Label();
+            label3 = new Label();
+            cbTankName = new ComboBox();
+            cbRegion = new ComboBox();
+            cbProductId = new ComboBox();
+            cbUserTankId = new ComboBox();
+            cbLocationName = new ComboBox();
             cbLocationId = new ComboBox();
             label6 = new Label();
             cbRTUNumber = new ComboBox();
             label2 = new Label();
             label1 = new Label();
             cbTankId = new ComboBox();
-            progressBar1 = new ProgressBar();
             lblUser = new Label();
             cbUserId = new ComboBox();
             lblNoofRecords = new Label();
@@ -95,15 +106,17 @@
             // 
             dgvExcel.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgvExcel.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvExcel.Location = new Point(16, 176);
+            dgvExcel.Location = new Point(16, 128);
             dgvExcel.Name = "dgvExcel";
             dgvExcel.RowHeadersWidth = 51;
-            dgvExcel.Size = new Size(738, 391);
+            dgvExcel.Size = new Size(738, 439);
             dgvExcel.TabIndex = 3;
             // 
             // gbEnvironment
             // 
             gbEnvironment.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            gbEnvironment.Controls.Add(chkTablePostBackup);
+            gbEnvironment.Controls.Add(chkTablePreBackup);
             gbEnvironment.Controls.Add(lblConnectionDetails);
             gbEnvironment.Controls.Add(label5);
             gbEnvironment.Location = new Point(16, 573);
@@ -113,10 +126,33 @@
             gbEnvironment.TabStop = false;
             gbEnvironment.Text = "Environment";
             // 
+            // chkTablePostBackup
+            // 
+            chkTablePostBackup.AutoSize = true;
+            chkTablePostBackup.Dock = DockStyle.Right;
+            chkTablePostBackup.Location = new Point(974, 23);
+            chkTablePostBackup.Name = "chkTablePostBackup";
+            chkTablePostBackup.Size = new Size(149, 24);
+            chkTablePostBackup.TabIndex = 27;
+            chkTablePostBackup.Text = "Table Post Backup";
+            chkTablePostBackup.UseVisualStyleBackColor = true;
+            // 
+            // chkTablePreBackup
+            // 
+            chkTablePreBackup.AutoSize = true;
+            chkTablePreBackup.Dock = DockStyle.Right;
+            chkTablePreBackup.Location = new Point(1123, 23);
+            chkTablePreBackup.Name = "chkTablePreBackup";
+            chkTablePreBackup.Size = new Size(142, 24);
+            chkTablePreBackup.TabIndex = 28;
+            chkTablePreBackup.Text = "Table Per Backup";
+            chkTablePreBackup.UseVisualStyleBackColor = true;
+            // 
             // lblConnectionDetails
             // 
             lblConnectionDetails.AutoSize = true;
-            lblConnectionDetails.Location = new Point(153, 23);
+            lblConnectionDetails.Dock = DockStyle.Left;
+            lblConnectionDetails.Location = new Point(144, 23);
             lblConnectionDetails.Name = "lblConnectionDetails";
             lblConnectionDetails.Size = new Size(21, 20);
             lblConnectionDetails.TabIndex = 20;
@@ -125,7 +161,8 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(6, 23);
+            label5.Dock = DockStyle.Left;
+            label5.Location = new Point(3, 23);
             label5.Name = "label5";
             label5.Size = new Size(141, 20);
             label5.TabIndex = 19;
@@ -133,6 +170,16 @@
             // 
             // groupBox2
             // 
+            groupBox2.Controls.Add(label9);
+            groupBox2.Controls.Add(label8);
+            groupBox2.Controls.Add(label7);
+            groupBox2.Controls.Add(label4);
+            groupBox2.Controls.Add(label3);
+            groupBox2.Controls.Add(cbTankName);
+            groupBox2.Controls.Add(cbRegion);
+            groupBox2.Controls.Add(cbProductId);
+            groupBox2.Controls.Add(cbUserTankId);
+            groupBox2.Controls.Add(cbLocationName);
             groupBox2.Controls.Add(cbLocationId);
             groupBox2.Controls.Add(label6);
             groupBox2.Controls.Add(cbRTUNumber);
@@ -145,7 +192,91 @@
             groupBox2.TabIndex = 6;
             groupBox2.TabStop = false;
             groupBox2.Text = "Mapping";
-            groupBox2.Enter += groupBox2_Enter;
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Location = new Point(19, 265);
+            label9.Name = "label9";
+            label9.Size = new Size(77, 20);
+            label9.TabIndex = 31;
+            label9.Text = "Product Id";
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Location = new Point(19, 231);
+            label8.Name = "label8";
+            label8.Size = new Size(88, 20);
+            label8.TabIndex = 30;
+            label8.Text = "User Tank Id";
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new Point(19, 197);
+            label7.Name = "label7";
+            label7.Size = new Size(82, 20);
+            label7.TabIndex = 29;
+            label7.Text = "Tank Name";
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(19, 163);
+            label4.Name = "label4";
+            label4.Size = new Size(56, 20);
+            label4.TabIndex = 28;
+            label4.Text = "Region";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(19, 129);
+            label3.Name = "label3";
+            label3.Size = new Size(110, 20);
+            label3.TabIndex = 27;
+            label3.Text = "Location Name";
+            // 
+            // cbTankName
+            // 
+            cbTankName.FormattingEnabled = true;
+            cbTankName.Location = new Point(162, 194);
+            cbTankName.Name = "cbTankName";
+            cbTankName.Size = new Size(193, 28);
+            cbTankName.TabIndex = 26;
+            // 
+            // cbRegion
+            // 
+            cbRegion.FormattingEnabled = true;
+            cbRegion.Location = new Point(162, 160);
+            cbRegion.Name = "cbRegion";
+            cbRegion.Size = new Size(193, 28);
+            cbRegion.TabIndex = 25;
+            // 
+            // cbProductId
+            // 
+            cbProductId.FormattingEnabled = true;
+            cbProductId.Location = new Point(162, 262);
+            cbProductId.Name = "cbProductId";
+            cbProductId.Size = new Size(193, 28);
+            cbProductId.TabIndex = 24;
+            // 
+            // cbUserTankId
+            // 
+            cbUserTankId.FormattingEnabled = true;
+            cbUserTankId.Location = new Point(162, 228);
+            cbUserTankId.Name = "cbUserTankId";
+            cbUserTankId.Size = new Size(193, 28);
+            cbUserTankId.TabIndex = 23;
+            // 
+            // cbLocationName
+            // 
+            cbLocationName.FormattingEnabled = true;
+            cbLocationName.Location = new Point(162, 126);
+            cbLocationName.Name = "cbLocationName";
+            cbLocationName.Size = new Size(193, 28);
+            cbLocationName.TabIndex = 22;
             // 
             // cbLocationId
             // 
@@ -197,13 +328,6 @@
             cbTankId.Name = "cbTankId";
             cbTankId.Size = new Size(193, 28);
             cbTankId.TabIndex = 0;
-            // 
-            // progressBar1
-            // 
-            progressBar1.Location = new Point(16, 141);
-            progressBar1.Name = "progressBar1";
-            progressBar1.Size = new Size(1268, 29);
-            progressBar1.TabIndex = 0;
             // 
             // lblUser
             // 
@@ -296,15 +420,16 @@
             btnStop.TabIndex = 16;
             btnStop.Text = "Stop";
             btnStop.UseVisualStyleBackColor = true;
+            btnStop.Click += btnStop_Click;
             // 
             // dgvLogs
             // 
             dgvLogs.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgvLogs.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvLogs.Location = new Point(770, 176);
+            dgvLogs.Location = new Point(770, 128);
             dgvLogs.Name = "dgvLogs";
             dgvLogs.RowHeadersWidth = 51;
-            dgvLogs.Size = new Size(514, 391);
+            dgvLogs.Size = new Size(514, 439);
             dgvLogs.TabIndex = 17;
             // 
             // groupBox1
@@ -388,7 +513,6 @@
             Controls.Add(lblNoofRecords);
             Controls.Add(cbUserId);
             Controls.Add(lblUser);
-            Controls.Add(progressBar1);
             Controls.Add(groupBox2);
             Controls.Add(gbEnvironment);
             Controls.Add(dgvExcel);
@@ -396,7 +520,6 @@
             Controls.Add(btnBrowser);
             Name = "main";
             Text = "Bulk Import";
-            Load += main_Load;
             ((System.ComponentModel.ISupportInitialize)dgvExcel).EndInit();
             gbEnvironment.ResumeLayout(false);
             gbEnvironment.PerformLayout();
@@ -417,7 +540,6 @@
         private DataGridView dgvExcel;
         private GroupBox gbEnvironment;
         private GroupBox groupBox2;
-        private ProgressBar progressBar1;
         private Label lblUser;
         private ComboBox cbUserId;
         private Label lblNoofRecords;
@@ -443,5 +565,17 @@
         private CheckBox ckTankName;
         private CheckBox ckRegion;
         private CheckBox ckLocationName;
+        private Label label9;
+        private Label label8;
+        private Label label7;
+        private Label label4;
+        private Label label3;
+        private ComboBox cbTankName;
+        private ComboBox cbRegion;
+        private ComboBox cbProductId;
+        private ComboBox cbUserTankId;
+        private ComboBox cbLocationName;
+        private CheckBox chkTablePostBackup;
+        private CheckBox chkTablePreBackup;
     }
 }
