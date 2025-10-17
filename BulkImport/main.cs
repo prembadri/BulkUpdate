@@ -1,3 +1,4 @@
+using DAL;
 using ExcelDataReader;
 using System.ComponentModel;
 using System.Data;
@@ -12,10 +13,17 @@ namespace BulkImport
         int toralProcessing = 0; int totalFailed = 0;
         bool stopProcessing = false;
 
+        private DBHelper _dbHelper;
+
         public main()
         {
+            _dbHelper = new DBHelper("YourConnectionStringHere");
+
             InitializeComponent();
             txtFileName.Enabled = false;
+
+            btnStart.Enabled = false;
+            btnStop.Enabled = false;
 
             DisableMappingandUpdateGroup();
 
@@ -98,6 +106,9 @@ namespace BulkImport
                 }
             }
             UpdateLogs("Completed Reading File");
+
+            btnStart.Enabled = true;
+            btnStop.Enabled = true;
         }
 
         private void LoadMappingGroup()
@@ -163,11 +174,19 @@ namespace BulkImport
 
             UpdateLogs("Validating Mapping Started...");
 
+            if (cbUserId.SelectedIndex < 0)
+            {
+                // write logic once user id logic is added
+            }
+
+
             if (!ckTankName.Checked && !ckTankName.Checked && !ckUserTankId.Checked && !ckRegion.Checked && !ckLocationName.Checked)
             {
                 isValid = false;
                 MessageBox.Show("Please select at least one field in the Mapping Group", "Validation Failed");
                 UpdateLogs("Please select at least one field in the Mapping Group");
+
+                return isValid;
             }
 
             if (ckProductId.Checked)
@@ -249,7 +268,7 @@ namespace BulkImport
                     PreBackup();
                 }
 
-                foreach (DataColumn dc in dt.Columns)
+                foreach (DataRow dc in dt.Rows)
                 {
                     toralProcessing++;
                     lblNoofRecordsProcessedCount.Text = toralProcessing.ToString();
@@ -277,13 +296,43 @@ namespace BulkImport
         private void PreBackup()
         {
             UpdateLogs("Started Pre Backup of the Table...");
+            
+            foreach (var item in _dbHelper.GetTableData("Tank"))
+            {
 
+            }
+            
+            foreach (var item in _dbHelper.GetTableData("Location"))
+            {
+            
+            }
+
+            foreach (var item in _dbHelper.GetTableData("TankConfig"))
+            {
+            
+            }
+            
             UpdateLogs("Completed Pre Backup of the Table...");
         }
 
         private void PostBackup()
         {
             UpdateLogs("Started Post Backup of the Table...");
+
+            foreach (var item in _dbHelper.GetTableData("Tank"))
+            {
+
+            }
+
+            foreach (var item in _dbHelper.GetTableData("Location"))
+            {
+
+            }
+
+            foreach (var item in _dbHelper.GetTableData("TankConfig"))
+            {
+
+            }
 
             UpdateLogs("Completed Post Backup of the Table...");
         }

@@ -85,7 +85,7 @@
             // btnBrowser
             // 
             btnBrowser.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnBrowser.Location = new Point(1557, 18);
+            btnBrowser.Location = new Point(1641, 18);
             btnBrowser.Name = "btnBrowser";
             btnBrowser.Size = new Size(94, 29);
             btnBrowser.TabIndex = 1;
@@ -98,30 +98,30 @@
             txtFileName.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             txtFileName.Location = new Point(16, 18);
             txtFileName.Name = "txtFileName";
-            txtFileName.Size = new Size(1535, 27);
+            txtFileName.Size = new Size(1619, 27);
             txtFileName.TabIndex = 2;
             txtFileName.Text = "No File Selected";
             // 
             // dgvExcel
             // 
-            dgvExcel.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dgvExcel.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             dgvExcel.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvExcel.Location = new Point(16, 128);
             dgvExcel.Name = "dgvExcel";
             dgvExcel.RowHeadersWidth = 51;
-            dgvExcel.Size = new Size(738, 439);
+            dgvExcel.Size = new Size(822, 439);
             dgvExcel.TabIndex = 3;
             // 
             // gbEnvironment
             // 
-            gbEnvironment.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            gbEnvironment.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             gbEnvironment.Controls.Add(chkTablePostBackup);
             gbEnvironment.Controls.Add(chkTablePreBackup);
             gbEnvironment.Controls.Add(lblConnectionDetails);
             gbEnvironment.Controls.Add(label5);
             gbEnvironment.Location = new Point(16, 573);
             gbEnvironment.Name = "gbEnvironment";
-            gbEnvironment.Size = new Size(1268, 50);
+            gbEnvironment.Size = new Size(1352, 50);
             gbEnvironment.TabIndex = 4;
             gbEnvironment.TabStop = false;
             gbEnvironment.Text = "Environment";
@@ -130,7 +130,7 @@
             // 
             chkTablePostBackup.AutoSize = true;
             chkTablePostBackup.Dock = DockStyle.Right;
-            chkTablePostBackup.Location = new Point(974, 23);
+            chkTablePostBackup.Location = new Point(1058, 23);
             chkTablePostBackup.Name = "chkTablePostBackup";
             chkTablePostBackup.Size = new Size(149, 24);
             chkTablePostBackup.TabIndex = 27;
@@ -141,7 +141,7 @@
             // 
             chkTablePreBackup.AutoSize = true;
             chkTablePreBackup.Dock = DockStyle.Right;
-            chkTablePreBackup.Location = new Point(1123, 23);
+            chkTablePreBackup.Location = new Point(1207, 23);
             chkTablePreBackup.Name = "chkTablePreBackup";
             chkTablePreBackup.Size = new Size(142, 24);
             chkTablePreBackup.TabIndex = 28;
@@ -170,6 +170,7 @@
             // 
             // groupBox2
             // 
+            groupBox2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
             groupBox2.Controls.Add(label9);
             groupBox2.Controls.Add(label8);
             groupBox2.Controls.Add(label7);
@@ -186,7 +187,7 @@
             groupBox2.Controls.Add(label2);
             groupBox2.Controls.Add(label1);
             groupBox2.Controls.Add(cbTankId);
-            groupBox2.Location = new Point(1290, 53);
+            groupBox2.Location = new Point(1374, 53);
             groupBox2.Name = "groupBox2";
             groupBox2.Size = new Size(361, 304);
             groupBox2.TabIndex = 6;
@@ -402,10 +403,10 @@
             // 
             // btnStart
             // 
-            btnStart.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            btnStart.Location = new Point(943, 93);
+            btnStart.Anchor = AnchorStyles.None;
+            btnStart.Location = new Point(1058, 93);
             btnStart.Name = "btnStart";
-            btnStart.Size = new Size(147, 29);
+            btnStart.Size = new Size(157, 29);
             btnStart.TabIndex = 15;
             btnStart.Text = "Start";
             btnStart.UseVisualStyleBackColor = true;
@@ -413,10 +414,10 @@
             // 
             // btnStop
             // 
-            btnStop.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            btnStop.Location = new Point(1117, 93);
+            btnStop.Anchor = AnchorStyles.None;
+            btnStop.Location = new Point(1223, 93);
             btnStop.Name = "btnStop";
-            btnStop.Size = new Size(147, 29);
+            btnStop.Size = new Size(141, 29);
             btnStop.TabIndex = 16;
             btnStop.Text = "Stop";
             btnStop.UseVisualStyleBackColor = true;
@@ -424,22 +425,23 @@
             // 
             // dgvLogs
             // 
-            dgvLogs.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dgvLogs.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             dgvLogs.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvLogs.Location = new Point(770, 128);
+            dgvLogs.Location = new Point(855, 128);
             dgvLogs.Name = "dgvLogs";
             dgvLogs.RowHeadersWidth = 51;
-            dgvLogs.Size = new Size(514, 439);
+            dgvLogs.Size = new Size(513, 439);
             dgvLogs.TabIndex = 17;
             // 
             // groupBox1
             // 
+            groupBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
             groupBox1.Controls.Add(ckProductId);
             groupBox1.Controls.Add(ckUserTankId);
             groupBox1.Controls.Add(ckTankName);
             groupBox1.Controls.Add(ckRegion);
             groupBox1.Controls.Add(ckLocationName);
-            groupBox1.Location = new Point(1290, 363);
+            groupBox1.Location = new Point(1374, 363);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(361, 260);
             groupBox1.TabIndex = 20;
@@ -500,7 +502,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1663, 629);
+            ClientSize = new Size(1747, 629);
             Controls.Add(groupBox1);
             Controls.Add(dgvLogs);
             Controls.Add(btnStop);
