@@ -14,7 +14,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DAL\DAL.csproj" />
+    <ProjectReference Include="..\BulkUpdateModel\BulkUpdateModel.csproj" />
+    <ProjectReference Include="..\DAL\DataAccess.csproj" />
   </ItemGroup>
 
 </Project>

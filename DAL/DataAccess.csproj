@@ -10,4 +10,14 @@
     <PackageReference Include="System.Data.SqlClient" Version="4.9.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\BulkUpdateModel\BulkUpdateModel.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="DataAccessLayer">
+      <HintPath>..\lib\DataAccessLayer.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>
