@@ -38,6 +38,8 @@
             lblConnectionDetails = new Label();
             label5 = new Label();
             groupBox2 = new GroupBox();
+            cbProductDesc = new ComboBox();
+            label18 = new Label();
             label15 = new Label();
             label16 = new Label();
             cbCallPerDay = new ComboBox();
@@ -91,6 +93,10 @@
             ckLocationName = new CheckBox();
             cbOrganization = new ComboBox();
             label10 = new Label();
+            label17 = new Label();
+            cbUpdatedTable = new ComboBox();
+            linkLabel2 = new LinkLabel();
+            downloadFileDialog = new SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)dgvExcel).BeginInit();
             gbEnvironment.SuspendLayout();
             groupBox2.SuspendLayout();
@@ -124,7 +130,6 @@
             // 
             // dgvExcel
             // 
-            dgvExcel.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             dgvExcel.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvExcel.Location = new Point(16, 128);
             dgvExcel.Name = "dgvExcel";
@@ -191,6 +196,8 @@
             // groupBox2
             // 
             groupBox2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
+            groupBox2.Controls.Add(cbProductDesc);
+            groupBox2.Controls.Add(label18);
             groupBox2.Controls.Add(label15);
             groupBox2.Controls.Add(label16);
             groupBox2.Controls.Add(cbCallPerDay);
@@ -219,12 +226,29 @@
             groupBox2.Controls.Add(label2);
             groupBox2.Controls.Add(label1);
             groupBox2.Controls.Add(cbTankId);
-            groupBox2.Location = new Point(1157, 53);
+            groupBox2.Location = new Point(1157, 57);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(601, 363);
+            groupBox2.Size = new Size(601, 359);
             groupBox2.TabIndex = 6;
             groupBox2.TabStop = false;
             groupBox2.Text = "Mapping";
+            // 
+            // cbProductDesc
+            // 
+            cbProductDesc.FormattingEnabled = true;
+            cbProductDesc.Location = new Point(137, 292);
+            cbProductDesc.Name = "cbProductDesc";
+            cbProductDesc.Size = new Size(182, 28);
+            cbProductDesc.TabIndex = 45;
+            // 
+            // label18
+            // 
+            label18.AutoSize = true;
+            label18.Location = new Point(19, 295);
+            label18.Name = "label18";
+            label18.Size = new Size(96, 20);
+            label18.TabIndex = 44;
+            label18.Text = "Product Desc";
             // 
             // label15
             // 
@@ -331,7 +355,7 @@
             // label9
             // 
             label9.AutoSize = true;
-            label9.Location = new Point(327, 230);
+            label9.Location = new Point(301, 55);
             label9.Name = "label9";
             label9.Size = new Size(77, 20);
             label9.TabIndex = 31;
@@ -392,7 +416,7 @@
             // cbProductId
             // 
             cbProductId.FormattingEnabled = true;
-            cbProductId.Location = new Point(408, 227);
+            cbProductId.Location = new Point(409, 52);
             cbProductId.Name = "cbProductId";
             cbProductId.Size = new Size(182, 28);
             cbProductId.TabIndex = 24;
@@ -416,7 +440,7 @@
             // cbLocationId
             // 
             cbLocationId.FormattingEnabled = true;
-            cbLocationId.Location = new Point(237, 52);
+            cbLocationId.Location = new Point(102, 52);
             cbLocationId.Name = "cbLocationId";
             cbLocationId.Size = new Size(193, 28);
             cbLocationId.TabIndex = 21;
@@ -424,7 +448,7 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(141, 55);
+            label6.Location = new Point(6, 55);
             label6.Name = "label6";
             label6.Size = new Size(83, 20);
             label6.TabIndex = 20;
@@ -716,11 +740,43 @@
             label10.TabIndex = 22;
             label10.Text = "Organization";
             // 
+            // label17
+            // 
+            label17.AutoSize = true;
+            label17.Location = new Point(361, 93);
+            label17.Name = "label17";
+            label17.Size = new Size(97, 20);
+            label17.TabIndex = 23;
+            label17.Text = "Update Table";
+            // 
+            // cbUpdatedTable
+            // 
+            cbUpdatedTable.FormattingEnabled = true;
+            cbUpdatedTable.Location = new Point(464, 88);
+            cbUpdatedTable.Name = "cbUpdatedTable";
+            cbUpdatedTable.Size = new Size(223, 28);
+            cbUpdatedTable.TabIndex = 24;
+            // 
+            // linkLabel2
+            // 
+            linkLabel2.AutoSize = true;
+            linkLabel2.Location = new Point(705, 91);
+            linkLabel2.Name = "linkLabel2";
+            linkLabel2.Size = new Size(78, 20);
+            linkLabel2.TabIndex = 26;
+            linkLabel2.TabStop = true;
+            linkLabel2.Text = "Download";
+            linkLabel2.VisitedLinkColor = Color.Blue;
+            linkLabel2.LinkClicked += linkLabel2_LinkClicked;
+            // 
             // main
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1770, 629);
+            Controls.Add(linkLabel2);
+            Controls.Add(cbUpdatedTable);
+            Controls.Add(label17);
             Controls.Add(label10);
             Controls.Add(cbOrganization);
             Controls.Add(groupBox1);
@@ -820,5 +876,11 @@
         private Label label14;
         private ComboBox cbInterval;
         private ComboBox cbStartTime;
+        private Label label17;
+        private ComboBox cbUpdatedTable;
+        private ComboBox cbProductDesc;
+        private Label label18;
+        private LinkLabel linkLabel2;
+        private SaveFileDialog downloadFileDialog;
     }
 }

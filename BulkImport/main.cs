@@ -1,6 +1,7 @@
 using DataAccess;
 using ExcelDataReader;
 using System.Data;
+using System.Windows.Forms;
 
 namespace BulkImport
 {
@@ -30,6 +31,20 @@ namespace BulkImport
             dgvLogs.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
             LoadOrganizations();
+            LoadUpdateTables();
+        }
+
+        public void LoadUpdateTables()
+        {
+            var items = new List<string>()
+            {
+                "Tank",
+                "Location",
+                "Product"
+            };
+
+            cbUpdatedTable.DataSource = items;
+            cbUpdatedTable.SelectedIndex = 0;
         }
 
         #region Events
@@ -600,17 +615,72 @@ namespace BulkImport
             UpdateLogs("Completed Updating Records...");
         }
 
-        public static DateTime ChangeTime(this DateTime dateTime, int hours, int minutes, int seconds, int milliseconds)
+        private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            return new DateTime(
-                dateTime.Year,
-                dateTime.Month,
-                dateTime.Day,
-                hours,
-                minutes,
-                seconds,
-                milliseconds,
-                dateTime.Kind);
+            string sourceFilePath = @"Templates\\";
+
+            if (cbUpdatedTable.SelectedIndex > -1)
+            {
+                switch (cbUpdatedTable.SelectedIndex)
+                {
+                    case 0: // Tank
+                        sourceFilePath += "TankConfig_Template.xlsx";
+                        break;
+                    case 1: // Location
+                        sourceFilePath += "Location_Template.xlsx";
+                        break;
+                    case 2:
+                        sourceFilePath += "Product_Template.xlsx";
+                        break;
+                    default:
+                        break;
+                }
+
+                // Configure the SaveFileDialog
+                downloadFileDialog.FileName = "template.xlsx";
+                downloadFileDialog.Filter = "Excel files (*.xlsx)|*.csv";
+                downloadFileDialog.Title = "Save File";
+
+
+                if (downloadFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    try
+                    {
+                        // Copy the file from the source to the selected destination
+                        File.Copy(sourceFilePath, downloadFileDialog.FileName, true);
+                        MessageBox.Show("File downloaded successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    catch (FileNotFoundException)
+                    {
+                        MessageBox.Show("Source file not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    catch (UnauthorizedAccessException)
+                    {
+                        MessageBox.Show("Permission denied to save the file.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select a table to download the template.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
+
+        //public DateTime ChangeTime(this DateTime dateTime, int hours, int minutes, int seconds, int milliseconds)
+        //{
+        //    return new DateTime(
+        //        dateTime.Year,
+        //        dateTime.Month,
+        //        dateTime.Day,
+        //        hours,
+        //        minutes,
+        //        seconds,
+        //        milliseconds,
+        //        dateTime.Kind);
+        //}
     }
 }

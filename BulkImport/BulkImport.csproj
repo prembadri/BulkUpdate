@@ -18,4 +18,16 @@
     <ProjectReference Include="..\DAL\DataAccess.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Templates\Location_Template.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Product_Template.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\TankConfig_Template.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
