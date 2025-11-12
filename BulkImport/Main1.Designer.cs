@@ -271,6 +271,7 @@
             btnStart.TabIndex = 12;
             btnStart.Text = "Start";
             btnStart.UseVisualStyleBackColor = true;
+            btnStart.Click += btnStart_Click;
             // 
             // btnStop
             // 
@@ -280,6 +281,7 @@
             btnStop.TabIndex = 11;
             btnStop.Text = "Stop";
             btnStop.UseVisualStyleBackColor = true;
+            btnStop.Click += btnStop_Click;
             // 
             // panel2
             // 

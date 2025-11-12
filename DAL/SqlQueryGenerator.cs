@@ -2,7 +2,7 @@
 
 public class SqlQueryGenerator
 {
-    public string GenerateUpdateQueries(DataTable dataTable, string tableName, string primaryKeyColumn)
+    public IEnumerable<string> GenerateUpdateQueries(DataTable dataTable, string tableName, string primaryKeyColumn)
     {
         var queries = new List<string>();
 
@@ -23,10 +23,28 @@ public class SqlQueryGenerator
 
             var updateQuery = $"UPDATE {tableName} SET {string.Join(", ", columns)} WHERE {primaryKeyColumn} = {FormatValue(row[primaryKeyColumn])};";
 
-            queries.Add(updateQuery);
+            yield return updateQuery;
+        }
+    }
+
+    public string GenerateUpdateQuery(DataColumnCollection dataColumns, DataRow dataRow, string tableName, string primaryKey, int primaryKeyId, string skipColumnName)
+    {
+        var columns = new List<string>();
+        var values = new List<string>();
+
+        foreach (DataColumn column in dataColumns)
+        {
+            if (column.ColumnName != skipColumnName && !dataRow.IsNull(column))
+            {
+                string value = FormatValue(dataRow[column]);
+                columns.Add($"{column.ColumnName} = {value}");
+                values.Add(value);
+            }
         }
 
-        return string.Join(Environment.NewLine, queries);
+        var updateQuery = $"UPDATE {tableName} SET {string.Join(", ", columns)} WHERE {primaryKey} = {FormatValue(primaryKeyId)};";
+
+        return updateQuery;
     }
 
     private string FormatValue(object value)

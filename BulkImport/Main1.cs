@@ -16,13 +16,17 @@ namespace BulkImport
     {
         private DataTable _logDateTable = new DataTable();
         private DataTable _excelDataTable = new DataTable();
-        private DBHelper _dbHelper;
+        private DBLayer _db;
+        private SqlQueryGenerator _sqlQueryGenerator;
+        private bool _stopFlage = false;
+
         public BulkUpsertTool()
         {
             InitializeComponent();
 
             // Initialize DBHelper
-            _dbHelper = new DBHelper("");
+            _db = new DBLayer("");
+            _sqlQueryGenerator = new SqlQueryGenerator();
 
             //Disable
             txtBrowse.Enabled = false;
@@ -55,7 +59,7 @@ namespace BulkImport
 
         private void LoadOrganizations()
         {
-            var organizations = _dbHelper.GetListOfOrganization();
+            var organizations = _db.GetListOfOrganization();
             cbOrganization.DataSource = organizations;
             cbOrganization.DisplayMember = "OrganizationName";
             cbOrganization.ValueMember = "OrganizationId";
@@ -64,7 +68,7 @@ namespace BulkImport
 
         private void LoadUsers(int orgID)
         {
-            var users = _dbHelper.GetListOfUsers(orgID);
+            var users = _db.GetListOfUsers(orgID);
             cbUser.DataSource = users;
             cbUser.DisplayMember = "UserName";
             cbUser.ValueMember = "UserId";
@@ -156,10 +160,29 @@ namespace BulkImport
                 }
             }
         }
+
+        private void btnStart_Click(object sender, EventArgs e)
+        {
+            string message = "List of Fields to Update";
+            string title = "Conform to Start the process";
+            if (ShowYesNoMessage(title, message))
+            {
+                StartProcessing();
+            }
+        }
+
+        private void btnStop_Click(object sender, EventArgs e)
+        {
+            _stopFlage = true;
+        }
         #endregion
 
         #region Helpers
-
+        private void StartProcessing()
+        {
+            _db.UpdateRecords(cbCatagory.SelectedText.ToString(), _excelDataTable, Convert.ToInt32(cbUser.SelectedText.ToString()));
+        }
+            
         private void LoadExcel(string filePath)
         {
             UpdateLogs($"Strated Reading File : {Path.GetFileName(filePath)}");
@@ -198,7 +221,25 @@ namespace BulkImport
             _logDateTable.Rows.Add(message);
             dgvLogs.Refresh();
         }
-        #endregion
+         
+        private void ShowValidationMessage(string message)
+        { 
+            MessageBox.Show(message, "Validation Failed");
+        }
 
+        private bool ShowYesNoMessage(string title, string message)
+        {
+            bool flage = false;
+            DialogResult result = MessageBox.Show(message, title, MessageBoxButtons.YesNo);
+
+            if (result == DialogResult.Yes)
+            {
+                flage = true;
+            }
+
+            return flage;
+
+        }
+        #endregion
     }
 }
