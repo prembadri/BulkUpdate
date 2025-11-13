@@ -23,9 +23,10 @@ namespace BulkImport
         public BulkUpsertTool()
         {
             InitializeComponent();
-
+            
             // Initialize DBHelper
-            _db = new DBLayer("");
+            _db = new DBLayer("Server=MARK-II\\SQLEXPRESS;Database=blazorecommerce;Trusted_Connection=True;");
+            var test = _db.TestConnection();
             _sqlQueryGenerator = new SqlQueryGenerator();
 
             //Disable
@@ -180,7 +181,7 @@ namespace BulkImport
         #region Helpers
         private void StartProcessing()
         {
-            _db.UpdateRecords(cbCatagory.SelectedText.ToString(), _excelDataTable, Convert.ToInt32(cbUser.SelectedText.ToString()));
+            _db.UpdateRecords(cbCatagory.SelectedItem.ToString(), _excelDataTable, Convert.ToInt32(0));
         }
             
         private void LoadExcel(string filePath)

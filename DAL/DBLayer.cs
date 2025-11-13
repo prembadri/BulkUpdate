@@ -12,10 +12,30 @@ namespace DataAccess
     public class DBLayer
     {
         private string _connectionString;
+        private SqlQueryGenerator _sqlQueryGenerator;
 
         public DBLayer(string connectionString)
         {
             _connectionString = connectionString;
+            _sqlQueryGenerator = new SqlQueryGenerator();
+        }
+
+        public bool TestConnection()
+        {
+            bool isConnected = false;
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(_connectionString))
+                {
+                    conn.Open();
+                    isConnected = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                string errorMsg = ex.Message;
+            }
+            return isConnected;
         }
 
         public List<User> GetListOfUsers(int orgID)
@@ -74,30 +94,94 @@ namespace DataAccess
             return organizations;
         }
 
-        public bool UpdateRecords(string table, DataTable dataTable, int userId)
+        public int RunQuery(string query,bool requiredId= false)
         {
-            bool result = false;
+            int result = 0;
+            if (requiredId)
+            {
+                try
+                {
+                    using (SqlConnection conn = new SqlConnection(_connectionString))
+                    {
+                        conn.Open();
+                        using (SqlCommand cmd = new SqlCommand(query, conn))
+                        {
+                            int rowsAffected = (int)cmd.ExecuteScalar();
+                            result = rowsAffected;
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    string errorMsg = ex.Message;
+                } 
+            }
+            else
+            {
+                try
+                {
+                    using (SqlConnection conn = new SqlConnection(_connectionString))
+                    {
+                        conn.Open();
+                        using (SqlCommand cmd = new SqlCommand(query, conn))
+                        {
+                            int rowsAffected = cmd.ExecuteNonQuery();
+                            result = rowsAffected;
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    string errorMsg = ex.Message;
+                }
+            }
+            return result;
+        }
+
+        public string UpdateRecords(string table, DataTable dataTable, int userId)
+        {
+            int result = 0;
+            int failed = 0;
 
             switch (table)
             {
                 case "TankConfig":
 
+                    // Get the old Tank Config Id from the DataTable
+
                     // Insert Copy of the old records 
                     var copyQuery = "INSERT INTO table_name (column1, column2, column3)\r\nSELECT column1, column2, column3\r\nFROM table_name\r\nWHERE condition;";
-                    
-                    // Update the New record tank Config 
+                    var copyTankId = RunQuery(copyQuery,true);
 
+                    // Update the New record tank Config 
                     var update = "updateQuery";
-                    
+                    var updateResult = RunQuery(update);
+
                     // Update the new tankConfig to the Tank Table 
 
                     break;
-
                 default:
+                    {
+                        foreach (var query in _sqlQueryGenerator.GenerateUpdateQueries(dataTable, "Location", "Id"))
+                        {
+                            using (SqlConnection conn = new SqlConnection(_connectionString))
+                            {
+                                conn.Open();
+                                using (SqlCommand cmd = new SqlCommand(query, conn))
+                                {
+                                    int rowsAffected = cmd.ExecuteNonQuery();
+                                    if (rowsAffected > 0)
+                                        result++;
+                                    else
+                                        failed++;
+                                }
+                            }
+                        }
+                    }
                     break;
             }
 
-            return result;
+            return string.Format("{0}|{1}", result, failed);
         }
     }
 }
